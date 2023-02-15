@@ -49,7 +49,7 @@ const cartControllers = {
   },
 
   getOneSummary: async (res, req) => {
-    const id = req.params._id;
+    // const id = req.params._id;
     const summary = {};
     const error = null;
 
