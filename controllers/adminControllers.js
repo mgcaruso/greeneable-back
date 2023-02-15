@@ -26,7 +26,7 @@ const adminControllers = {
           "." +
           file.name.split(".")[file.name.split(".").length - 1];
         const route = path.resolve("storage/products", fileName);
-        const ruta = `https://greeeneable-back.herokuapp.com/products/${fileName}`;
+        const ruta = `https://greeneable-back-2023.up.railway.app/products/${fileName}`;
         file.mv(route, (err) => {
           if (err) {
             console.log(err);
@@ -150,7 +150,7 @@ const adminControllers = {
       } catch (err) {
         error = err;
       }
-      console.log("productdb photo", productdb);
+      // console.log("productdb photo", productdb);
       res.json({
         response: error ? "ERROR" : productdb,
         success: error ? false : true,

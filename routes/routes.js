@@ -47,9 +47,11 @@ const {
   getThreeToyProducts,
   addToCart,
   getStock,
+  validateStock
 } = ProductsControllers;
 
 Router.route("/products").get(getProducts);
+Router.route("/productcart/validateStock").post(validateStock);
 
 // Router.route('/products/upload').post(addProduct)
 

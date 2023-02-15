@@ -140,7 +140,7 @@ const ProductsControllers = {
       error = err;
     }
     var threeRandom = [];
-    let filteredArray = products.filter((product)=>product.category === "Lamp");
+    let filteredArray = products.filter((product) => product.category === "Lamp");
     const shuffled = filteredArray.sort(() => 0.5 - Math.random());
     threeRandom = shuffled.slice(0, 3);
 
@@ -159,13 +159,13 @@ const ProductsControllers = {
       error = err;
     }
     var threeRandom = [];
-    let filteredArray = products.filter((product)=>product.category === "Toys");
-    
-      const shuffled = filteredArray.sort(() => 0.5 - Math.random());
-      threeRandom = shuffled.slice(0, 3);
-  
-    
-    
+    let filteredArray = products.filter((product) => product.category === "Toys");
+
+    const shuffled = filteredArray.sort(() => 0.5 - Math.random());
+    threeRandom = shuffled.slice(0, 3);
+
+
+
 
     res.json({
       response: error ? "ERROR" : threeRandom,
@@ -174,12 +174,39 @@ const ProductsControllers = {
     });
   },
 
-  
 
-  getStock: async (res, req) => {
+
+  getStock: async (req, res) => {
     console.log(req.body);
     const productAdded = req.body;
   },
+
+  validateStock: async (req, res) => {
+    // let productsDB = [];
+    let error = null;
+    console.log(req.body.cart)
+    //mapear el cart y sacar stock y id
+    let isValid = true;
+
+    try {
+      const idAndStockArray = req.body.cart.map(({ _id, stock, quantity }) => ({ _id, stock, quantity }));
+      console.log(idAndStockArray);
+      
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].quantity > arr[i].stock) {
+          isValid = false;
+          break;
+        }
+      }
+    } catch (err) {
+      err = error
+    }
+    res.json({
+      success: isValid,
+      error: error,
+      message: isValid ? "La compra se ha confirmado." : "No hay suficiente stock de uno de los productos. Intenta modificando las cantidades."
+    })
+  }
 };
 
 module.exports = ProductsControllers;
